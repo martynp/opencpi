@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # #####
 #
@@ -37,7 +37,9 @@ else
 fi
 tmp=/tmp/ocpictest$$
 failed=
-set -o pipefail
+if [ -n "$BASH" ]; then
+  set -o pipefail
+fi
 out="2> /dev/null"
 if test "$OUT" != ""; then out="$OUT"; fi
 function doit {

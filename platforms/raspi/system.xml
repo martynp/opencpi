@@ -1,0 +1,10 @@
+<opencpi>
+  <container>
+    <rcc load='1' />
+    <hdl load='0' />
+  </container>
+  <transfer smbsize='128K'>
+    <pio load='1' smbsize='10M' />
+    <dma load='1' />
+  </transfer>
+</opencpi>

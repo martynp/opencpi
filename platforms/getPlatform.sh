@@ -26,7 +26,12 @@ elif test -f /etc/lsb-release; then
 elif test -f /etc/os-release; then
   # We'll assume debian
   . /etc/os-release
-  HostVersion=d$VERSION_ID
+  if test "$ID" = raspbian; then
+    HostVersion=raspi
+    HostProcessor=arm
+  else
+    HostVersion=d$VERSION_ID
+  fi
 elif test $HostSystem = darwin -a "`which sw_vers`" != ""; then
   HostSystem=macos
   HostVersion=`sw_vers -productVersion | sed 's/^\([0-9][0-9]*\.[0-9][0-9]*\).*/\1/' | tr . _`
@@ -46,7 +51,8 @@ Target=$HostSystem-$HostVersion-$HostProcessor
 Platform=
 for i in $(dirname $0)/*; do
   if test -d $i -a -f $i/target; then
-     if test $(<$i/target) = $Target; then
+     TestTarget=`cat $i/target`
+     if test "$TestTarget" = "$Target"; then
        if test "$Platform" != ""; then
          echo Platform is ambiguous, both $Platform and $(basename $i) have target: $Target 1>&2
          exit 1
