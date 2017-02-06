@@ -1,11 +1,11 @@
 # Setup to build this target
 OcpiThisFile=$(lastword $(MAKEFILE_LIST))
-#include $(dir $(OcpiThisFile))/xilinx-target.mk
-#f:=$(OCPI_XILINX_EDK_DIR)/gnu/arm/lin/bin
-#ifeq ($(wildcard $f),)
-#  $(error When setting up to build for zed, OCPI_XILINX_EDK_DIR is "$(OCPI_XILINX_EDK_DIR)". Cannot find $f. Perhaps the EDK was not installed when Xilinx tools were installed?).
-#endif
-export OCPI_CROSS_BUILD_BIN_DIR:=/home/vagrant/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+
+f:=$(OCPI_RASPI_TOOL_DIR)/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+ifeq ($(wildcard $f),)
+  $(error When setting up to build for raspi, OCPI_RASPI_TOOL_DIR is "$(OCPI_RASPI_TOOL_DIR)". Cannot find $f.).
+endif
+export OCPI_CROSS_BUILD_BIN_DIR:=$f
 export OCPI_CROSS_HOST:=arm-linux-gnueabihf
 export OCPI_TARGET_CFLAFS:=-mcpu=cortex-a53 -Wall -std=c99
 export OCPI_TARGET_CXXFLAGS:=-mcpu=cortex-a53 -Wall -std=c++0x

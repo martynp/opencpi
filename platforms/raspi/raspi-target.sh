@@ -1,8 +1,9 @@
 # Setup to build this target
-#if test ! -d $f; then
-#  echo Error: When setting up to build for zed, OCPI_XILINX_EDK_DIR is "$OCPI_XILINX_EDK_DIR". Cannot find $f. Perhaps the EDK was not installed when Xilinx tools were installed\?.
-#fi
-export OCPI_CROSS_BUILD_BIN_DIR=/home/vagrant/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+f=$OCPI_RASPI_TOOL_DIR/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin
+if test ! -d $f; then
+  echo Error: When setting up to build for zed, OCPI_RASPI_TOOL_DIR is "$OCPI_RASPI_TOOL_DIR". Cannot find $f.
+fi
+export OCPI_CROSS_BUILD_BIN_DIR=$OCPI_RASPI_TOOL_DIR
 export OCPI_CROSS_HOST=arm-linux-gnueabihf
 export OCPI_TARGET_CFLAGS="-mcpu=cortex-a53 -Wall -std=c99"
 export OCPI_TARGET_CXXFLAGS="-mcpu=corext-a53 -Wall -std=c++0x"
